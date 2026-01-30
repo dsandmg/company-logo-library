@@ -28,10 +28,5 @@
     "name": "Microsoft",
     "file": "microsoft.svg",
     "tags": "tech, windows"
-  },
-  {
-    "name": "Pwc",
-    "file": "pwc.svg",
-    "tags": "new"
   }
 ]
