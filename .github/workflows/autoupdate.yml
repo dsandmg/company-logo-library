@@ -1,0 +1,71 @@
+name: Update Logo Library
+permissions:
+  contents: write
+
+# Trigger: Run this robot whenever a file is pushed to the 'logos' folder
+on:
+  push:
+    paths:
+      - 'logos/**'
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Update Script
+        run: |
+          python3 -c "
+          import os, json
+
+          LOGO_DIR = 'logos'
+          JSON_FILE = 'index.json'
+
+          # 1. Load existing menu (to keep your old tags)
+          existing_data = {}
+          if os.path.exists(JSON_FILE):
+              try:
+                  with open(JSON_FILE, 'r') as f:
+                      old_list = json.load(f)
+                      # Create a dictionary for easy lookup: {'google.svg': {data}}
+                      for item in old_list:
+                          existing_data[item['file']] = item
+              except:
+                  existing_data = {}
+
+          # 2. Scan the folder for actual files
+          new_list = []
+          
+          # Get all SVG files and sort them alphabetically
+          try:
+              files = sorted([f for f in os.listdir(LOGO_DIR) if f.lower().endswith('.svg')])
+          except FileNotFoundError:
+              files = []
+              print('Logos folder not found!')
+
+          for filename in files:
+              # If we already know this file, keep its old data (tags)
+              if filename in existing_data:
+                  new_list.append(existing_data[filename])
+              else:
+                  # It's a new file! Auto-generate the name
+                  # Example: 'amazon-web-services.svg' -> 'Amazon Web Services'
+                  clean_name = filename.replace('.svg', '').replace('-', ' ').replace('_', ' ').title()
+                  new_list.append({
+                      'name': clean_name, 
+                      'file': filename, 
+                      'tags': 'new' # We mark it as new so you can find it later
+                  })
+
+          # 3. Save the new list
+          with open(JSON_FILE, 'w') as f:
+              json.dump(new_list, f, indent=2)
+          "
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🤖 Robot: Updated index.json with new logos"
+          file_pattern: index.json
