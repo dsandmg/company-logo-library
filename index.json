@@ -1,4 +1,32 @@
 [
-  { "name": "Google", "file": "google.svg", "tags": "tech, search" },
-  { "name": "Microsoft", "file": "microsoft.svg", "tags": "tech, windows" }
+  {
+    "name": "Auditoria",
+    "file": "auditoria.svg",
+    "tags": "new"
+  },
+  {
+    "name": "Aws",
+    "file": "aws.svg",
+    "tags": "new"
+  },
+  {
+    "name": "Google",
+    "file": "google.svg",
+    "tags": "tech, search"
+  },
+  {
+    "name": "Kainos",
+    "file": "kainos.svg",
+    "tags": "new"
+  },
+  {
+    "name": "Microsoft",
+    "file": "microsoft.svg",
+    "tags": "tech, windows"
+  },
+  {
+    "name": "Pwd",
+    "file": "pwd.svg",
+    "tags": "new"
+  }
 ]
