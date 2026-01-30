@@ -1,15 +1,5 @@
 [
   {
-    "name": "Auditoria",
-    "file": "auditoria.svg",
-    "tags": "new"
-  },
-  {
-    "name": "Aws",
-    "file": "aws.svg",
-    "tags": "new"
-  },
-  {
     "name": "Google",
     "file": "google.svg",
     "tags": "tech, search"
