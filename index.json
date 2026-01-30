@@ -1,0 +1,4 @@
+[
+  { "name": "Google", "file": "google.svg", "tags": "tech, search" },
+  { "name": "Microsoft", "file": "microsoft.svg", "tags": "tech, windows" }
+]
